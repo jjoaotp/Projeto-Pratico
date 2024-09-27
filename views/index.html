@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Clientes</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <h1 id="title">Cadastro de Lead</h1>
+            <form action="/leads/inserir" method="POST">
+                <label>Nome:</label><input type="text" name="nome"><br>
+                <label>Interesse:</label><input type="text" name="interesse"><br>
+                <label>Celular:</label><input type="text" name="num_celular"><br>
+                <label>Instagram:</label><input type="text" name="instagram"><br>
+                <label>Fonte captação:</label><input type="text" name="fonte_captacao"><br>
+                <label>Data registro:</label><input type="date" name="data_registro"><br>
+                <label>Data ultimo contato:</label><input type="date" name="data_ultimo_contato"><br>
+                <label>Ativo:</label><input type="checkbox" name="ativo"><br>
+                <button type="submit">Cadastrar Lead</button>
+            </form>
+        </div>
+        <div class="container">
+            <h1 id="title">Cadastro de Cliente</h1>
+            <form action="/clientes/inserir" method="POST">
+                <label>CPF:</label><input type="text" name="cpf"><br>
+                <label>Nome:</label><input type="text" name="nome"><br>
+                <label>Sobrenome:</label><input type="text" name="sobrenome"><br>
+                <label>Celular:</label><input type="text" name="numero_celular"><br>
+                <label>Instagram:</label><input type="text" name="instagram"><br>
+                <label>Data de Início:</label><input type="date" name="data_inicio"><br>
+                <label>Data Último Contato:</label><input type="date" name="data_ultimo_contato"><br>
+                <label>Ativo:</label><input type="checkbox" name="ativo"><br>
+                <button type="submit">Cadastrar Cliente</button>
+            </form>
+        </div>
+        <div class="container">
+            <h1 id="title">Cadastro de Smartphone</h1>
+            <form action="/smartphone/inserir" method="POST">
+                <label>Modelo:</label><input type="text" name="modelo"><br>
+                <label>Numero de serie:</label><input type="text" name="num_serie"><br>
+                <label>Cor:</label><input type="text" name="cor"><br>
+                <label>Armazenamento:</label><input type="text" name="armazenamento"><br>
+                <label>CPF cliente:</label><input type="text" name="cpf_cliente"><br>
+                <button type="submit">Cadastrar Cliente</button>
+            </form>
+        </div>
+        <div class="container">
+            <h1 id="title">Cadastro de Acessorio</h1>
+            <form action="/acessorio/inserir" method="POST">
+                <label>Nome:</label><input type="text" name="nome"><br>
+                <label>Descrição:</label><input type="text" name="descricao"><br>
+                <label>CPF Cliente:</label><input type="text" name="cpf_cliente"><br>
+                <button type="submit">Cadastrar Acessorio</button>
+            </form>
+        </div>
+        <div class="container">
+            <h1 id="title">Cadastro de Promoção</h1>
+            <form action="/promocao/inserir" method="POST">
+                <div id="input">
+                    <label>Nome:</label><input type="text" name="cpf">
+                </div>
+                <div>
+                    <label>Descrição:</label><input type="text" name="nome"><br>
+                </div>
+                <label>Publico Alvo:</label><input type="text" name="sobrenome"><br>
+                <label>Data inicio:</label><input type="text" name="numero_celular"><br>
+                <label>Data ultimo contato:</label><input type="text" name="instagram"><br>
+                <label>Data de Início:</label><input type="date" name="data_inicio"><br>
+                <label>Ativo:</label><input type="checkbox" name="ativo"><br>
+                <button type="submit">Cadastrar Promoção </button>
+            </form>
+        </div>
+    </div>
+    <div>
+        <h2>Clientes Cadastrados</h2>
+        <button onclick="consultarClientes()">Consultar Clientes</button>
+        <div id="clientes-lista"></div>
+    </div>
+    <div>
+        <h2>Leads Cadastrados</h2>
+        <button onclick="consultarLeads()">Consultar Leads</button>
+        <div id="leads-lista"></div>
+    </div>
+
+    <script>
+        function consultarClientes() {
+            fetch('/clientes/consultar')
+                .then(response => response.json())
+                .then(data => {
+                    const lista = document.getElementById('clientes-lista');
+                    lista.innerHTML = data.map(cliente => `<p> Nome: ${cliente.nome} <br> Sobrenome:${cliente.sobrenome}<br> Ultimo Contato: ${cliente.data_ultimo_contato}</p>`).join('');
+                });
+        }
+    
+
+
+    function consultarLeads() {
+        fetch('/leads/consultar')
+            .then(response => response.json())
+            .then(data => {
+                const lista = document.getElementById('leads-lista');
+                lista.innerHTML = data.map(leads => `<p> Nome:${leads.nome}<br> Celular: ${leads.num_celular}<br> Interesse: ${leads.interesse}</p>`).join('');
+            });
+    }
+
+
+
+    function consultarPromocoes() {
+        fetch('/promocao/consultar')
+            .then(response => response.json())
+            .then(data => {
+                const lista = document.getElementById('promocao-lista');
+                lista.innerHTML = data.map(leads => `<p>${'nome'+ promocao.nome} ${leads.num_celular} ${leads.interesse}</p>`).join('');
+            });
+    }
+
+
+    
+</script>
+
+</body>
+</html>

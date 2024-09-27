@@ -1,0 +1,25 @@
+#header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#title{
+    display: flex;
+    justify-content: center;
+    color: brown;
+    font-size: 20px;
+}
+
+#input{
+    display: flex;
+    justify-content: space-between;
+}
+
+.container{
+    padding: 5px;
+    background-color: rgb(197, 197, 197);
+    border-radius: 16px;
+    border-color: black;
+}
+
